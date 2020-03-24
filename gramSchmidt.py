@@ -1,21 +1,35 @@
 import numpy as np
-from fractions import Fraction
 
-v1 = np.array([0, 1, -1])
-v2 = np.array([1, 0, 1])
-v3 = np.array([1, 1, 1])
+def unitVector (v):
+    return np.linalg.norm(v)
 
-def unitVector (vector):
-    return vector / np.linalg.norm(vector)
+def projection (u, v):
+    return np.dot(u, v) / np.dot(u, u) * u
 
-def proj1 (x, f1):
-    return (np.vdot(x, f1)) * f1
+def normalize (v):
+    return v / unitVector(v)
 
-def proj2 (x, f1, f2):
-    return np.vdot(x, f1) * f1 + np.vdot(x, f2) * f2
+def gramSchmidt (v):
+    vectors = np.array(v)
 
-e1 = unitVector(v1)
-e2 = unitVector(v2 - proj1(v2, e1))
-e3 = unitVector(v3 - proj2(v3, e1, e2))
+    # number of vectors
+    n = vectors.shape[0]
 
-print(e1, e2, e3)
+    # init two matrix
+    u = np.zeros(vectors.shape)
+    e = np.zeros(vectors.shape)
+    
+    # for each vector
+    for i in range(n):
+        u[i] = vectors[i] - sum(map(lambda x : projection(x, vectors[i]), u[:i]))
+        e[i] = normalize(u[i])
+    
+    return e
+
+if __name__ ==  '__main__':
+    
+    v1 = np.array([1,1,0,0])
+    v2 = np.array([1,0,-1,1])
+    v3 = np.array([0,1,1,1])
+
+    print(gramSchmidt([v1, v2, v3]))

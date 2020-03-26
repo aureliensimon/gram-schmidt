@@ -30,8 +30,7 @@ def getVector (dim):
     while True:
         vector = list(map(int, input().split(',')))
 
-        if (len(vector) == dim): break
-    return vector
+        if (len(vector) == dim): return vector
 
 def getVectors (nbVectors, dim):
     vectors = []

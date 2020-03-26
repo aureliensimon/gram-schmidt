@@ -26,10 +26,24 @@ def gramSchmidt (v):
     
     return e
 
-if __name__ ==  '__main__':
-    
-    v1 = np.array([1,1,0,0])
-    v2 = np.array([1,0,-1,1])
-    v3 = np.array([0,1,1,1])
+def getVector (dim):
+    while True:
+        vector = list(map(int, input().split(',')))
 
-    print(gramSchmidt([v1, v2, v3]))
+        if (len(vector) == dim): break
+    return vector
+
+def getVectors (nbVectors, dim):
+    vectors = []
+    
+    for i in range(nbVectors):
+        vectors.append(getVector(dim))
+
+    return vectors
+
+if __name__ ==  '__main__':
+
+    nbVectors = int(input('Number of vectors :'))
+    dim = int(input('Vectors dimensions :'))
+
+    print(gramSchmidt(getVectors(nbVectors, dim)))

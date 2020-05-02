@@ -8,7 +8,7 @@ def projection (u, v):
 
 def normalize (v):
     return v / unitVector(v)
-
+    
 def gramSchmidt (v):
     vectors = np.array(v)
 
@@ -27,9 +27,9 @@ def gramSchmidt (v):
     return e
 
 def getVector (dim):
+    print('Use , as a separator (exemple: 0,0,1)')
     while True:
-        vector = list(map(int, input().split(',')))
-
+        vector = list(map(int, input('Enter vector >').split(',')))
         if (len(vector) == dim): return vector
 
 def getVectors (nbVectors, dim):
